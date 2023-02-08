@@ -12,7 +12,7 @@ const Ddata = [
   {
     cover: "./images/discount/discount-3.png",
     name: "Sony PS4",
-    price: "$50",
+    price: "$40",
   },
   {
     cover: "./images/discount/discount-4.png",
