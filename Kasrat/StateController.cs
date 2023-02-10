@@ -7,13 +7,13 @@ namespace Kasrat
 {
 	//[Route("api/[controller]")]
 	[ApiController]
-	public class ValuesController : ControllerBase
+	public class StateController : ControllerBase
 	{
 		public dal _conn;
 
 		IConfiguration configuration;
 
-		public ValuesController(IConfiguration configuration, dal conn)
+		public StateController(IConfiguration configuration, dal conn)
 		{
 			this.configuration = configuration;
 			_conn = conn;
