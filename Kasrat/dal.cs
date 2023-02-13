@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+using System.Reflection;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -109,68 +110,1446 @@ namespace Kasrat
 			{
 				if (cal.lifestyle == "s")
 				{
+					//if (cal.goal == "lose fat")
+					//{
+					//	if (cal.experience == "b")
+					//	{
+					//		if (cal.gender == "male")
+					//		{
+					//			if (cal.bodyfat >= 18)
+					//			{
+					//				bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+					//				maintenance = bmr * 1.3;
+					//				ddal.calories = maintenance-(0.2) * maintenance;
+					//				var calfat = (0.25) * ddal.calories;
+					//				ddal.fat = calfat;
+					//				ddal.protein = (1.5) * cal.weight;
+					//				var calprotein = ddal.protein * 4;
+					//				var calfromproteinandfat = calfat + calprotein;
+					//				var calcarb = ddal.calories - (calfromproteinandfat);
+					//				ddal.carbohydrate = calcarb / 4;
+					//				ddal.maintenance = maintenance;
+
+					//			}
+					//		}
+					//	}
+					//}
+
 					if (cal.goal == "lose fat")
 					{
 						if (cal.experience == "b")
 						{
-							if (cal.gender == "male")
+							if (cal.bodyfat >= 18)
 							{
-								if (cal.bodyfat >= 18)
-								{
-									bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-									maintenance = bmr * 1.3;
-									ddal.calories = maintenance-(0.2) * maintenance;
-									var calfat = (0.25) * ddal.calories;
-									ddal.fat = calfat;
-									ddal.protein = (1.5) * cal.weight;
-									var calprotein = ddal.protein * 4;
-									var calfromproteinandfat = calfat + calprotein;
-									var calcarb = ddal.calories - (calfromproteinandfat);
-									ddal.carbohydrate = calcarb / 4;
-									ddal.maintenance = maintenance;
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance - (0.2) * maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
 
-								}
+					else if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "b")
+						{
+
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance + ((0.25) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat > 12 && cal.bodyfat < 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance - ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance + ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat > 12 && cal.bodyfat < 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance - ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance + ((0.1) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+				}
+				else if (cal.lifestyle == "la")
+				{
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance - (0.2) * maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					else if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "b")
+						{
+
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance + ((0.25) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat > 12 && cal.bodyfat < 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance - ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance + ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat > 12 && cal.bodyfat < 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance - ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance + ((0.1) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
 							}
 						}
 					}
 				}
-				else if (cal.lifestyle == "la")
-				{
-					bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-					maintenance = bmr * 1.6;
-				}
 				else if (cal.lifestyle == "ma")
 				{
-					bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-					maintenance = bmr * 1.8;
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance - (0.2) * maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					else if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "b")
+						{
+
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance + ((0.25) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat > 12 && cal.bodyfat < 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance - ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance + ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat > 12 && cal.bodyfat < 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance - ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance + ((0.1) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
 				}
+
 				else if (cal.lifestyle == "ha")
 				{
-					bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-					maintenance = bmr * 2;
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance - (0.2) * maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					else if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "b")
+						{
+
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance + ((0.25) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat > 12 && cal.bodyfat < 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance - ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance + ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat > 12 && cal.bodyfat < 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat >= 18)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance - ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat <= 12)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance + ((0.1) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
 				}
 			}
+			//-----------------------------------------------------------------------FEMALE-------------------------------------------------
 			else if (cal.gender == "female")
 			{
 				if (cal.lifestyle == "s")
 				{
-					bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-					maintenance = bmr * 1.3;
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance - ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance + ((0.25) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat > 22 && cal.bodyfat < 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+					//intermediate
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance + ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance + ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat > 22 && cal.bodyfat < 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+					//advanced
+
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance - ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.3;
+								ddal.calories = maintenance + ((0.10) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
 				}
+
 				else if (cal.lifestyle == "la")
 				{
-					bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-					maintenance = bmr * 1.6;
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance - ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+								return ddal;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance + ((0.25) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat > 22 && cal.bodyfat < 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+					//intermediate
+
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance + ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance + ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat > 22 && cal.bodyfat < 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+					//advanced
+
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance - ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.6;
+								ddal.calories = maintenance + ((0.10) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
 				}
+
 				else if (cal.lifestyle == "ma")
 				{
-					bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-					maintenance = bmr * 1.8;
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance - ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance + ((0.25) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat > 22 && cal.bodyfat < 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+					//intermediate
+
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance + ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance + ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat > 22 && cal.bodyfat < 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+					//advanced
+
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance - ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 1.8;
+								ddal.calories = maintenance + ((0.10) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
 				}
+
 				else if (cal.lifestyle == "ha")
 				{
-					bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-					maintenance = bmr * 2;
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance - ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance + ((0.25) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "b")
+						{
+							if (cal.bodyfat > 22 && cal.bodyfat < 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+					//intermediate
+
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance + ((0.2) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance + ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+
+
+					if (cal.goal == "build muscle lose fat")
+					{
+						if (cal.experience == "i")
+						{
+							if (cal.bodyfat > 22 && cal.bodyfat < 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance;
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+					//advanced
+
+
+					if (cal.goal == "lose fat")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat >= 28)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance - ((0.15) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
+
+
+					if (cal.goal == "build muscle")
+					{
+						if (cal.experience == "a")
+						{
+							if (cal.bodyfat <= 22)
+							{
+								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+								maintenance = bmr * 2;
+								ddal.calories = maintenance + ((0.10) * maintenance);
+								var calfat = (0.25) * ddal.calories;
+								ddal.fat = calfat;
+								ddal.protein = (1.5) * cal.weight;
+								var calprotein = ddal.protein * 4;
+								var calfromproteinandfat = calfat + calprotein;
+								var calcarb = ddal.calories - (calfromproteinandfat);
+								ddal.carbohydrate = calcarb / 4;
+								ddal.maintenance = maintenance;
+							}
+						}
+					}
 				}
 			}
 			//caloriecount res = dietgen(maintenance, cal.bodyfat, cal.gender, cal.experience, cal.goal,cal.weight);
@@ -179,242 +1558,9 @@ namespace Kasrat
 		//	return $"BMR = {bmr} and Maintenance Calories = {maintenance}";
 		}
 
-
-		//public caloriecount dietgen(double maintenance, double fat, string gender, string experience, string goal, double weight)
-		//{
-		//	caloriecount cal = new caloriecount();
-		//	if (goal == "lose fat")
-		//	{
-		//		if (experience == "b")
-		//		{
-		//			if (gender == "male")
-		//			{
-		//				if (fat >= 18)
-		//				{
-		//					cal.calories = maintenance - ((20 / 100) * maintenance);
-		//					var calfat = (25 / 100) * cal.calories;
-		//					cal.fat = calfat;
-		//					cal.protein = (1.5) * weight;
-		//					var calprotein = cal.protein * 4;
-		//					var calfromproteinandfat = calfat + calprotein;
-		//					var calcarb = cal.calories - (calfromproteinandfat);
-		//					cal.carbohydrate = calcarb / 4;
-		//					cal.maintenance = maintenance;
-							
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	if (goal == "lose fat")
-		//	{
-		//		if (experience == "b")
-		//		{
-		//			if (gender == "female")
-		//			{
-		//				if (fat >= 28)
-		//				{
-		//					cal.calories = maintenance - ((20 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-		//	if (goal == "build muscle")
-		//	{
-		//		if (experience == "b")
-		//		{
-		//			if (gender == "male")
-		//			{
-		//				if (fat <= 12)
-		//				{
-		//					cal.calories = maintenance + ((25 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-			
-		//	if (goal == "build muscle")
-		//	{
-		//		if (experience == "b")
-		//		{
-		//			if (gender == "female")
-		//			{
-		//				if (fat <= 22)
-		//				{
-		//					cal.calories = maintenance + ((25 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	if (goal == "build muscle lose fat")
-		//	{
-		//		if (experience == "b")
-		//		{
-		//			if (gender == "male")
-		//			{
-		//				if (fat > 12 && fat<18)
-		//				{
-		//					cal.calories = maintenance;
-		//				}
-		//			}
-		//		}
-		//	}
-		//	if (goal == "build muscle lose fat")
-		//	{
-		//		if (experience == "b")
-		//		{
-		//			if (gender == "female")
-		//			{
-		//				if (fat > 22 && fat < 28)
-		//				{
-		//					cal.calories = maintenance;
-		//				}
-		//			}
-		//		}
-		//	}
-		//	//intermediate
-		//	if (goal == "lose fat")
-		//	{
-		//		if (experience == "i")
-		//		{
-		//			if (gender == "male")
-		//			{
-		//				if (fat >= 18)
-		//				{
-		//					cal.calories = maintenance - ((20 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	if (goal == "lose fat")
-		//	{
-		//		if (experience == "i")
-		//		{
-		//			if (gender == "female")
-		//			{
-		//				if (fat >= 28)
-		//				{
-		//					cal.calories = maintenance - ((20 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-		//	if (goal == "build muscle")
-		//	{
-		//		if (experience == "i")
-		//		{
-		//			if (gender == "male")
-		//			{
-		//				if (fat <= 12)
-		//				{
-		//					cal.calories = maintenance + ((15 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	if (goal == "build muscle")
-		//	{
-		//		if (experience == "i")
-		//		{
-		//			if (gender == "female")
-		//			{
-		//				if (fat <= 22)
-		//				{
-		//					cal.calories = maintenance + ((15 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	if (goal == "build muscle lose fat")
-		//	{
-		//		if (experience == "i")
-		//		{
-		//			if (gender == "male")
-		//			{
-		//				if (fat > 12 && fat < 18)
-		//				{
-		//					cal.calories = maintenance;
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	if (goal == "build muscle lose fat")
-		//	{
-		//		if (experience == "i")
-		//		{
-		//			if (gender == "female")
-		//			{
-		//				if (fat > 22 && fat < 28)
-		//				{
-		//					cal.calories = maintenance;
-		//				}
-		//			}
-		//		}
-		//	}
-		//	//advanced
-		//	if (goal == "lose fat")
-		//	{
-		//		if (experience == "b")
-		//		{
-		//			if (gender == "male")
-		//			{
-		//				if (fat >= 18)
-		//				{
-		//					cal.calories = maintenance - ((15 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	if (goal == "lose fat")
-		//	{
-		//		if (experience == "a")
-		//		{
-		//			if (gender == "female")
-		//			{
-		//				if (fat >= 28)
-		//				{
-		//					cal.calories = maintenance - ((15 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-		//	if (goal == "build muscle")
-		//	{
-		//		if (experience == "a")
-		//		{
-		//			if (gender == "male")
-		//			{
-		//				if (fat <= 12)
-		//				{
-		//					cal.calories = maintenance + ((10 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	if (goal == "build muscle")
-		//	{
-		//		if (experience == "a")
-		//		{
-		//			if (gender == "female")
-		//			{
-		//				if (fat <= 22)
-		//				{
-		//					cal.calories = maintenance + ((10 / 100) * maintenance);
-		//				}
-		//			}
-		//		}
-		//	}
-
-		//	return cal;
-		//}
-
+		//----------------------------------------------------------------------------------
+		
+		//--------------------------------------------------------------------------------------------
 		public responsebmi bmi(double height, double weight)
 		{
 			string path;
