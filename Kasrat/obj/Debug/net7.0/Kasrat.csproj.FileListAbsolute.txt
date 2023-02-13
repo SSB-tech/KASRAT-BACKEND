@@ -50,3 +50,4 @@ C:\Users\basne\source\repos\Kasrat\Kasrat\bin\Debug\net7.0\Microsoft.IdentityMod
 C:\Users\basne\source\repos\Kasrat\Kasrat\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\basne\source\repos\Kasrat\Kasrat\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\basne\source\repos\Kasrat\Kasrat\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\basne\source\repos\Kasrat\Kasrat\bin\Debug\net7.0\System.Web.Cors.dll

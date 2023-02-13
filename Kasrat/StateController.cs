@@ -21,7 +21,7 @@ namespace Kasrat
 
 		[HttpPost]
 		[Route("api/[controller]/register")]
-		public IActionResult registeration(model a)
+		public IActionResult registeration(register a)
 		{
 			var con = new SqlConnection(configuration.GetConnectionString("default"));
 			var data = _conn.register(a);

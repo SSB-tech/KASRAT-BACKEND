@@ -14,11 +14,11 @@ namespace Kasrat
 			this.calcu = calcu;
 		}
 
-		[HttpGet]
+		[HttpPost]
 		[Route("api/[controller]/bmr")]  //height in cm
 		public ActionResult Get(calculate cal)
 		{
-			responsecal res = calcu.dietplan(cal);
+			caloriecount res = calcu.dietplan(cal);
 			return Ok(res);
 			//return new OkObjectResult(new responsecal { bmr = res.bmr, maintenance = res.maintenance });
 		}

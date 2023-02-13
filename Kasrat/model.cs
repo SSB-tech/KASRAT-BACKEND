@@ -2,15 +2,20 @@
 
 namespace Kasrat
 {
-	public class model
+	public class register
 	{
-		public string? Name { get; set; }
+		public string? UserName { get; set; }
 		public string? Password { get; set; }
-		public string? Contact { get; set; }
+		public string ConfirmPassword {get; set;}
 		public string? Email { get; set; }
-		public string? Address { get; set; }
 	}
+	public class response
+	{
+		public bool isSuccess { get; set; }
+		public string message { get; set; }
+		public string token { get; set; }
 
+	}
 	public class login
 	{
 		public string? username { get; set; }
@@ -24,6 +29,20 @@ namespace Kasrat
 		public int age { get; set; }
 		public string lifestyle { get; set; }
 		public string gender { get; set; }
+		public float bodyfat { get; set; }
+		public string experience { get; set;}
+		public string goal { get; set;}
+
+	}
+
+	public class caloriecount
+	{
+		public double calories { get; set;}
+		public double carbohydrate { get; set;}
+		public double protein { get; set; }
+		public double fat { get; set; }
+		public double maintenance { get; set; }
+
 
 	}
 
