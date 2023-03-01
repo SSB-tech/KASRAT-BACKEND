@@ -42,9 +42,14 @@ namespace Kasrat
 		public double protein { get; set; }
 		public double fat { get; set; }
 		public double maintenance { get; set; }
-
-
+		public string message { get; set;}
 	}
+
+	public class calculatebmi
+	{
+		public double weight { get; set; }
+		public double height { get; set; }
+	} 
 
 	public class responsecal
 	{
@@ -55,7 +60,9 @@ namespace Kasrat
 
 	public class responsebmi
 	{
-		public double bmi { get; set; }
+        public bool isSuccess { get; set; }
+
+        public double bmi { get; set; }
 		public string result { get; set; }
 
 		public string fileurl { get; set; }

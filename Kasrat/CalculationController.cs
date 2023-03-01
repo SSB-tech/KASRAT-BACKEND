@@ -23,11 +23,11 @@ namespace Kasrat
 			//return new OkObjectResult(new responsecal { bmr = res.bmr, maintenance = res.maintenance });
 		}
 
-		[HttpGet]
+		[HttpPost]
 		[Route("api/[controller]/bmi")]
-		public responsebmi bmi(double height, double weight)     //height in meter, weight in kg
+		public responsebmi bmi(calculatebmi cal)     //height in meter, weight in kg
 		{
-			var bodymassindex = calcu.bmi(height, weight);
+			var bodymassindex = calcu.bmi(cal);
 			return bodymassindex;
 		}
 

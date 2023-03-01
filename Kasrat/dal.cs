@@ -110,31 +110,6 @@ namespace Kasrat
 			{
 				if (cal.lifestyle == "s")
 				{
-					//if (cal.goal == "lose fat")
-					//{
-					//	if (cal.experience == "b")
-					//	{
-					//		if (cal.gender == "male")
-					//		{
-					//			if (cal.bodyfat >= 18)
-					//			{
-					//				bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-					//				maintenance = bmr * 1.3;
-					//				ddal.calories = maintenance-(0.2) * maintenance;
-					//				var calfat = (0.25) * ddal.calories;
-					//				ddal.fat = calfat;
-					//				ddal.protein = (1.5) * cal.weight;
-					//				var calprotein = ddal.protein * 4;
-					//				var calfromproteinandfat = calfat + calprotein;
-					//				var calcarb = ddal.calories - (calfromproteinandfat);
-					//				ddal.carbohydrate = calcarb / 4;
-					//				ddal.maintenance = maintenance;
-
-					//			}
-					//		}
-					//	}
-					//}
-
 					if (cal.goal == "lose fat")
 					{
 						if (cal.experience == "b")
@@ -153,7 +128,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					else if (cal.goal == "build muscle")
@@ -174,9 +151,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -197,7 +175,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "lose fat")
@@ -217,9 +197,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -240,7 +221,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -261,7 +244,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "lose fat")
@@ -282,7 +267,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -303,7 +290,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 				}
@@ -327,7 +316,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					else if (cal.goal == "build muscle")
@@ -350,7 +341,9 @@ namespace Kasrat
 								ddal.maintenance = maintenance;
 
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -371,7 +364,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "lose fat")
@@ -393,7 +388,9 @@ namespace Kasrat
 								ddal.maintenance = maintenance;
 
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -414,7 +411,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -435,7 +434,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "lose fat")
@@ -456,7 +457,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -477,7 +480,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 				}
 				else if (cal.lifestyle == "ma")
@@ -500,7 +505,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					else if (cal.goal == "build muscle")
@@ -521,9 +528,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -544,7 +552,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "lose fat")
@@ -564,9 +574,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -587,7 +598,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -608,7 +621,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "lose fat")
@@ -629,7 +644,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -650,7 +667,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 				}
 
@@ -674,7 +693,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					else if (cal.goal == "build muscle")
@@ -695,9 +716,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -718,7 +740,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "lose fat")
@@ -738,9 +762,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -761,7 +786,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -782,7 +809,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "lose fat")
@@ -803,7 +832,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -824,7 +855,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 				}
 			}
@@ -850,9 +883,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -873,9 +907,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -896,7 +931,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 					//intermediate
 
@@ -918,7 +955,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -939,7 +978,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -960,7 +1001,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 					//advanced
 
@@ -983,7 +1026,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1005,7 +1050,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 				}
 
@@ -1029,9 +1076,10 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 								return ddal;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -1051,9 +1099,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -1074,7 +1123,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 					//intermediate
 
@@ -1097,7 +1148,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -1118,7 +1171,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1141,7 +1196,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 					//advanced
 
@@ -1164,7 +1221,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1186,7 +1245,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 				}
 
@@ -1209,9 +1270,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1232,9 +1294,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -1255,7 +1318,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 					//intermediate
 
@@ -1278,7 +1343,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -1299,7 +1366,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1322,7 +1391,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 					//advanced
 
@@ -1345,7 +1416,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1367,7 +1440,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 				}
 
@@ -1390,9 +1465,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1413,9 +1489,10 @@ namespace Kasrat
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle lose fat")
@@ -1436,7 +1513,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 					//intermediate
 
@@ -1459,7 +1538,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 					if (cal.goal == "build muscle")
@@ -1480,7 +1561,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1503,7 +1586,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 					//advanced
 
@@ -1526,7 +1611,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 
 
@@ -1548,7 +1635,9 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 							}
-						}
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
 					}
 				}
 			}
@@ -1561,10 +1650,12 @@ namespace Kasrat
 		//----------------------------------------------------------------------------------
 		
 		//--------------------------------------------------------------------------------------------
-		public responsebmi bmi(double height, double weight)
+		public responsebmi bmi(calculatebmi cal)
 		{
 			string path;
 			string data = "";
+			var weight = cal.weight;
+			var height = cal.height;
 			var index = weight / (height * height);
 
 			if (index < 18.5)
@@ -1598,15 +1689,19 @@ namespace Kasrat
 			//stream.Position= 0;
 			//return new FileStreamResult(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") { FileDownloadName = "ssb.pdf" };
 			//FileStreamResult file = new FileStreamResult(stream, "application/pdf") { FileDownloadName = "ssb.pdf" };
-			if (data == "Obese")
+			if (data.Length > 0)
 			{
-				 path = @"C:\Users\basne\source\repos\Kasrat\Kasrat\content\OBESE WORKOUT.pdf";
+				if (data == "Obese")
+				{
+					path = @"C:\Users\basne\source\repos\Kasrat\Kasrat\content\OBESE WORKOUT.pdf";
+				}
+				else
+				{
+					path = @"C:\Users\basne\source\repos\Kasrat\Kasrat\content\UNDERWEIGHT WORKOUT.pdf";
+				}
+				return new responsebmi { isSuccess= true, bmi = index, result = data, fileurl = path };
 			}
-			else
-			{
-				 path = @"C:\Users\basne\source\repos\Kasrat\Kasrat\content\UNDERWEIGHT WORKOUT.pdf";
-			}
-			return new responsebmi { bmi = index, result = data, fileurl = path};
+			return new responsebmi { isSuccess = false };
 		}
 	}
 }
