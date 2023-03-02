@@ -120,14 +120,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance - (0.2) * maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+								ddal.calfromprotein = ddal.protein * 4;
+								ddal.calfromcarb = ddal.carbohydrate * 4;
+								ddal.calfromfat = ddal.fat * 9;
+
+								ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+								ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -144,14 +154,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance + ((0.25) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -167,14 +187,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -190,14 +220,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance - ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -213,14 +253,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance + ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -236,14 +286,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -259,14 +319,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance - ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -282,14 +352,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance + ((0.1) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -308,14 +388,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance - (0.2) * maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -332,7 +422,7 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance + ((0.25) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
@@ -340,7 +430,17 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 
-							}
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -356,14 +456,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -379,7 +489,7 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance - ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
@@ -387,7 +497,17 @@ namespace Kasrat
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
 
-							}
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -403,14 +523,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance + ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -426,14 +556,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -449,14 +589,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance - ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -472,14 +622,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance + ((0.1) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -497,14 +657,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance - (0.2) * maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -521,14 +691,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance + ((0.25) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -544,14 +724,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -567,14 +757,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance - ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -590,14 +790,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance + ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -613,14 +823,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -636,14 +856,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance - ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -659,14 +889,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance + ((0.1) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -685,14 +925,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance - (0.2) * maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -709,14 +959,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance + ((0.25) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -732,14 +992,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -755,14 +1025,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance - ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -778,14 +1058,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance + ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -801,14 +1091,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -824,14 +1124,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance - ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -847,14 +1157,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance + ((0.1) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -876,14 +1196,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance - ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -900,14 +1230,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance + ((0.25) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -923,14 +1263,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -947,14 +1297,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance + ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -970,14 +1330,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance + ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -993,14 +1363,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1018,14 +1398,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance - ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1042,14 +1432,24 @@ namespace Kasrat
 								maintenance = bmr * 1.3;
 								ddal.calories = maintenance + ((0.10) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1068,14 +1468,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance - ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-								return ddal;
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                                return ddal;
 							}
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
@@ -1092,14 +1502,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance + ((0.25) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1115,14 +1535,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1140,14 +1570,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance + ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1163,14 +1603,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance + ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1188,14 +1638,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1213,14 +1673,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance - ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1237,14 +1707,24 @@ namespace Kasrat
 								maintenance = bmr * 1.6;
 								ddal.calories = maintenance + ((0.10) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/ 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1263,14 +1743,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance - ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1287,14 +1777,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance + ((0.25) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1310,14 +1810,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1335,14 +1845,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance + ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1358,14 +1878,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance + ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1383,14 +1913,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1408,14 +1948,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance - ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1432,14 +1982,24 @@ namespace Kasrat
 								maintenance = bmr * 1.8;
 								ddal.calories = maintenance + ((0.10) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1458,14 +2018,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance - ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1482,14 +2052,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance + ((0.25) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1505,14 +2085,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1530,14 +2120,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance + ((0.2) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1553,14 +2153,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance + ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1578,14 +2188,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance;
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1603,14 +2223,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance - ((0.15) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat/9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }
@@ -1627,14 +2257,24 @@ namespace Kasrat
 								maintenance = bmr * 2;
 								ddal.calories = maintenance + ((0.10) * maintenance);
 								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat;
+								ddal.fat = calfat / 9;
 								ddal.protein = (1.5) * cal.weight;
 								var calprotein = ddal.protein * 4;
 								var calfromproteinandfat = calfat + calprotein;
 								var calcarb = ddal.calories - (calfromproteinandfat);
 								ddal.carbohydrate = calcarb / 4;
 								ddal.maintenance = maintenance;
-							}
+
+                                ddal.calfromprotein = ddal.protein * 4;
+                                ddal.calfromcarb = ddal.carbohydrate * 4;
+                                ddal.calfromfat = ddal.fat * 9;
+
+                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+                                ddal.message = "Your fat% is ideal for your goal";
+                            }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
                         }

@@ -42,7 +42,13 @@ namespace Kasrat
 		public double protein { get; set; }
 		public double fat { get; set; }
 		public double maintenance { get; set; }
-		public string message { get; set;}
+		public double calfromcarb { get; set; }
+		public double calfromprotein { get; set; }
+		public double calfromfat { get; set; }
+        public double perfromcarb { get; set; }
+        public double perfromprotein { get; set; }
+        public double perfromfat { get; set; }
+        public string message { get; set;}
 	}
 
 	public class calculatebmi
