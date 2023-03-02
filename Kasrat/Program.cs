@@ -30,6 +30,8 @@ builder.Services.AddAuthentication(authOptions =>
 	};
 });
 builder.Services.AddScoped(typeof(StateController));
+//builder.Services.AddScoped(typeof(CalculationController));
+
 builder.Services.AddScoped<dal>();
 
 var app = builder.Build();

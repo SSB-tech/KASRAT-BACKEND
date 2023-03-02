@@ -72,6 +72,7 @@ namespace Kasrat
 					{
 						Subject = new System.Security.Claims.ClaimsIdentity(new Claim[]
 						{
+						new Claim(ClaimTypes.NameIdentifier, data.ID.ToString()), // add user ID as a claim
 						new Claim(ClaimTypes.NameIdentifier, a.username)
 						}),
 						Expires = DateTime.UtcNow.AddMinutes(30),
@@ -136,7 +137,12 @@ namespace Kasrat
                                 ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
                                 ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
 
-								ddal.message = "Your fat% is ideal for your goal";
+								//ddal.weight = cal.weight;
+								//ddal.bodyfat = cal.bodyfat;
+								var height = cal.height * 0.01;
+								ddal.bmi = (cal.weight) / (height * height); 
+
+                                ddal.message = "Your fat% is ideal for your goal";
                             }
                             ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
                             return ddal;
@@ -2287,10 +2293,11 @@ namespace Kasrat
 		//	return $"BMR = {bmr} and Maintenance Calories = {maintenance}";
 		}
 
-		//----------------------------------------------------------------------------------
-		
-		//--------------------------------------------------------------------------------------------
-		public responsebmi bmi(calculatebmi cal)
+
+        //----------------------------------------------------------------------------------
+
+        //--------------------------------------------------------------------------------------------
+        public responsebmi bmi(calculatebmi cal)
 		{
 			string path;
 			string data = "";

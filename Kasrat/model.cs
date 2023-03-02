@@ -32,7 +32,7 @@ namespace Kasrat
 		public float bodyfat { get; set; }
 		public string experience { get; set;}
 		public string goal { get; set;}
-
+	
 	}
 
 	public class caloriecount
@@ -48,10 +48,19 @@ namespace Kasrat
         public double perfromcarb { get; set; }
         public double perfromprotein { get; set; }
         public double perfromfat { get; set; }
-        public string message { get; set;}
+		public double bmi { get; set; }
+		public string message { get; set;}
 	}
 
-	public class calculatebmi
+	public class progress
+	{
+		public DateTime date { get; set; }
+        public double bmi { get; set; }
+		public double weight { get; set; }
+		public double bodyfat { get; set; }
+	}
+
+    public class calculatebmi
 	{
 		public double weight { get; set; }
 		public double height { get; set; }
