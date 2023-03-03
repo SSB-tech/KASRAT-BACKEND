@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.IdentityModel.Tokens;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
@@ -95,2208 +96,3404 @@ namespace Kasrat
 			return res;
 		}
 
-		public caloriecount dietplan(calculate cal)
-		{
-			if (string.IsNullOrEmpty(cal.gender) || string.IsNullOrEmpty(cal.lifestyle))
-			{
-				//return new responsecal { status = "unsuccessful" };
-			}
-			cal.lifestyle.ToLower();
-			cal.gender = cal.gender.ToLower();
-			double bmr = 0;
-			double maintenance = 0;
-			caloriecount ddal = new caloriecount();
-
-			if (cal.gender == "male")
-			{
-				if (cal.lifestyle == "s")
-				{
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance - (0.2) * maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-								ddal.calfromprotein = ddal.protein * 4;
-								ddal.calfromcarb = ddal.carbohydrate * 4;
-								ddal.calfromfat = ddal.fat * 9;
-
-								ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-								//ddal.weight = cal.weight;
-								//ddal.bodyfat = cal.bodyfat;
-								var height = cal.height * 0.01;
-								ddal.bmi = (cal.weight) / (height * height); 
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					else if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "b")
-						{
-
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance + ((0.25) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat > 12 && cal.bodyfat < 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance - ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance + ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat > 12 && cal.bodyfat < 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance - ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance + ((0.1) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-				}
-				else if (cal.lifestyle == "la")
-				{
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance - (0.2) * maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					else if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "b")
-						{
-
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance + ((0.25) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat > 12 && cal.bodyfat < 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance - ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance + ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat > 12 && cal.bodyfat < 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance - ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance + ((0.1) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-				}
-				else if (cal.lifestyle == "ma")
-				{
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance - (0.2) * maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					else if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "b")
-						{
-
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance + ((0.25) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat > 12 && cal.bodyfat < 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance - ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance + ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat > 12 && cal.bodyfat < 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance - ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance + ((0.1) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-				}
-
-				else if (cal.lifestyle == "ha")
-				{
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance - (0.2) * maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					else if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "b")
-						{
-
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance + ((0.25) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat > 12 && cal.bodyfat < 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance - ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance + ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat > 12 && cal.bodyfat < 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat >= 18)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance - ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat <= 12)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance + ((0.1) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-				}
-			}
-			//-----------------------------------------------------------------------FEMALE-------------------------------------------------
-			else if (cal.gender == "female")
-			{
-				if (cal.lifestyle == "s")
-				{
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance - ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance + ((0.25) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat > 22 && cal.bodyfat < 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-					//intermediate
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance + ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance + ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat > 22 && cal.bodyfat < 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-					//advanced
-
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance - ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.3;
-								ddal.calories = maintenance + ((0.10) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-				}
-
-				else if (cal.lifestyle == "la")
-				{
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance - ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                                return ddal;
-							}
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance + ((0.25) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat > 22 && cal.bodyfat < 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-					//intermediate
-
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance + ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance + ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat > 22 && cal.bodyfat < 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-					//advanced
-
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance - ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.6;
-								ddal.calories = maintenance + ((0.10) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/ 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-				}
-
-				else if (cal.lifestyle == "ma")
-				{
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance - ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance + ((0.25) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat > 22 && cal.bodyfat < 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-					//intermediate
-
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance + ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance + ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat > 22 && cal.bodyfat < 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-					//advanced
-
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance - ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 1.8;
-								ddal.calories = maintenance + ((0.10) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-				}
-
-				else if (cal.lifestyle == "ha")
-				{
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance - ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance + ((0.25) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "b")
-						{
-							if (cal.bodyfat > 22 && cal.bodyfat < 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-					//intermediate
-
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance + ((0.2) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance + ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-
-					if (cal.goal == "build muscle lose fat")
-					{
-						if (cal.experience == "i")
-						{
-							if (cal.bodyfat > 22 && cal.bodyfat < 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance;
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-					//advanced
-
-
-					if (cal.goal == "lose fat")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat >= 28)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance - ((0.15) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat/9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-
-
-					if (cal.goal == "build muscle")
-					{
-						if (cal.experience == "a")
-						{
-							if (cal.bodyfat <= 22)
-							{
-								bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
-								maintenance = bmr * 2;
-								ddal.calories = maintenance + ((0.10) * maintenance);
-								var calfat = (0.25) * ddal.calories;
-								ddal.fat = calfat / 9;
-								ddal.protein = (1.5) * cal.weight;
-								var calprotein = ddal.protein * 4;
-								var calfromproteinandfat = calfat + calprotein;
-								var calcarb = ddal.calories - (calfromproteinandfat);
-								ddal.carbohydrate = calcarb / 4;
-								ddal.maintenance = maintenance;
-
-                                ddal.calfromprotein = ddal.protein * 4;
-                                ddal.calfromcarb = ddal.carbohydrate * 4;
-                                ddal.calfromfat = ddal.fat * 9;
-
-                                ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
-                                ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
-                                ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
-
-                                ddal.message = "Your fat% is ideal for your goal";
-                            }
-                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
-                            return ddal;
-                        }
-					}
-				}
-			}
-			//caloriecount res = dietgen(maintenance, cal.bodyfat, cal.gender, cal.experience, cal.goal,cal.weight);
-			return ddal;
-			//return new responsecal { bmr = bmr, maintenance = maintenance, status = "success" };
-		//	return $"BMR = {bmr} and Maintenance Calories = {maintenance}";
-		}
+        //public caloriecount dietplan(calculate cal)
+        //{
+        //	if (string.IsNullOrEmpty(cal.gender) || string.IsNullOrEmpty(cal.lifestyle))
+        //	{
+        //		//return new responsecal { status = "unsuccessful" };
+        //	}
+        //	cal.lifestyle.ToLower();
+        //	cal.gender = cal.gender.ToLower();
+        //	double bmr = 0;
+        //	double maintenance = 0;
+        //	caloriecount ddal = new caloriecount();
+
+        //	if (cal.gender == "male")
+        //	{
+        //		if (cal.lifestyle == "s")
+        //		{
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance - (0.2) * maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //						ddal.calfromprotein = ddal.protein * 4;
+        //						ddal.calfromcarb = ddal.carbohydrate * 4;
+        //						ddal.calfromfat = ddal.fat * 9;
+
+        //						ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //						//ddal.weight = cal.weight;
+        //						//ddal.bodyfat = cal.bodyfat;
+        //						var height = cal.height * 0.01;
+        //						ddal.bmi = (cal.weight) / (height * height); 
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			else if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance + ((0.25) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat > 12 && cal.bodyfat < 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance - ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance + ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat > 12 && cal.bodyfat < 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance - ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance + ((0.1) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //		}
+        //		else if (cal.lifestyle == "la")
+        //		{
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance - (0.2) * maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			else if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance + ((0.25) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat > 12 && cal.bodyfat < 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance - ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance + ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat > 12 && cal.bodyfat < 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance - ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance + ((0.1) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //		}
+        //		else if (cal.lifestyle == "ma")
+        //		{
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance - (0.2) * maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			else if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance + ((0.25) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat > 12 && cal.bodyfat < 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance - ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance + ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat > 12 && cal.bodyfat < 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance - ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance + ((0.1) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //		}
+
+        //		else if (cal.lifestyle == "ha")
+        //		{
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance - (0.2) * maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			else if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance + ((0.25) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat > 12 && cal.bodyfat < 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance - ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance + ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat > 12 && cal.bodyfat < 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat >= 18)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance - ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat <= 12)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance + ((0.1) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //		}
+        //	}
+        //	//-----------------------------------------------------------------------FEMALE-------------------------------------------------
+        //	else if (cal.gender == "female")
+        //	{
+        //		if (cal.lifestyle == "s")
+        //		{
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance - ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance + ((0.25) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat > 22 && cal.bodyfat < 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //			//intermediate
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance + ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance + ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat > 22 && cal.bodyfat < 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //			//advanced
+
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance - ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.3;
+        //						ddal.calories = maintenance + ((0.10) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //		}
+
+        //		else if (cal.lifestyle == "la")
+        //		{
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance - ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                              return ddal;
+        //					}
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance + ((0.25) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat > 22 && cal.bodyfat < 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //			//intermediate
+
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance + ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance + ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat > 22 && cal.bodyfat < 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //			//advanced
+
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance - ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.6;
+        //						ddal.calories = maintenance + ((0.10) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/ 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //		}
+
+        //		else if (cal.lifestyle == "ma")
+        //		{
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance - ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance + ((0.25) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat > 22 && cal.bodyfat < 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //			//intermediate
+
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance + ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance + ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat > 22 && cal.bodyfat < 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //			//advanced
+
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance - ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 1.8;
+        //						ddal.calories = maintenance + ((0.10) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //		}
+
+        //		else if (cal.lifestyle == "ha")
+        //		{
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance - ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance + ((0.25) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "b")
+        //				{
+        //					if (cal.bodyfat > 22 && cal.bodyfat < 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //			//intermediate
+
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance + ((0.2) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance + ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+
+        //			if (cal.goal == "build muscle lose fat")
+        //			{
+        //				if (cal.experience == "i")
+        //				{
+        //					if (cal.bodyfat > 22 && cal.bodyfat < 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance;
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //			//advanced
+
+
+        //			if (cal.goal == "lose fat")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat >= 28)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance - ((0.15) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat/9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+
+
+        //			if (cal.goal == "build muscle")
+        //			{
+        //				if (cal.experience == "a")
+        //				{
+        //					if (cal.bodyfat <= 22)
+        //					{
+        //						bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+        //						maintenance = bmr * 2;
+        //						ddal.calories = maintenance + ((0.10) * maintenance);
+        //						var calfat = (0.25) * ddal.calories;
+        //						ddal.fat = calfat / 9;
+        //						ddal.protein = (1.5) * cal.weight;
+        //						var calprotein = ddal.protein * 4;
+        //						var calfromproteinandfat = calfat + calprotein;
+        //						var calcarb = ddal.calories - (calfromproteinandfat);
+        //						ddal.carbohydrate = calcarb / 4;
+        //						ddal.maintenance = maintenance;
+
+        //                              ddal.calfromprotein = ddal.protein * 4;
+        //                              ddal.calfromcarb = ddal.carbohydrate * 4;
+        //                              ddal.calfromfat = ddal.fat * 9;
+
+        //                              ddal.perfromprotein = ((ddal.calfromprotein) / (ddal.calories)) * 100;
+        //                              ddal.perfromcarb = ((ddal.calfromcarb) / (ddal.calories)) * 100;
+        //                              ddal.perfromfat = ((ddal.calfromfat) / (ddal.calories)) * 100;
+
+        //                              ddal.message = "Your fat% is ideal for your goal";
+        //                          }
+        //                          ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+        //                          return ddal;
+        //                      }
+        //			}
+        //		}
+        //	}
+        //	//caloriecount res = dietgen(maintenance, cal.bodyfat, cal.gender, cal.experience, cal.goal,cal.weight);
+        //	return ddal;
+        //	//return new responsecal { bmr = bmr, maintenance = maintenance, status = "success" };
+        ////	return $"BMR = {bmr} and Maintenance Calories = {maintenance}";
+        //}
 
 
         //----------------------------------------------------------------------------------
 
         //--------------------------------------------------------------------------------------------
+
+        public caloriecount malediet(double maintenance, double bmr, double weight, double height, double calories)
+        {
+            caloriecount ddal = new caloriecount();
+            ddal.calories = Math.Round(calories,2);
+            var calfat = (0.25) * ddal.calories;
+            ddal.fat = Math.Round(calfat / 9,2);
+            ddal.protein = Math.Round((1.5) * weight,2);
+            var calprotein = ddal.protein * 4;
+            var calfromproteinandfat = calfat + calprotein;
+            var calcarb = ddal.calories - (calfromproteinandfat);
+            ddal.carbohydrate = Math.Round(calcarb / 4,2);
+            ddal.maintenance = Math.Round(maintenance,2);
+
+            ddal.calfromprotein = Math.Round(ddal.protein * 4,2);
+            ddal.calfromcarb = Math.Round(ddal.carbohydrate * 4,2);
+            ddal.calfromfat = Math.Round(ddal.fat * 9,2);
+
+            ddal.perfromprotein = Math.Round(((ddal.calfromprotein) / (ddal.calories)) * 100,2);
+            ddal.perfromcarb = Math.Round(((ddal.calfromcarb) / (ddal.calories)) * 100,2);
+            ddal.perfromfat = Math.Round(((ddal.calfromfat) / (ddal.calories)) * 100,2);
+
+            var heightinm = height * 0.01;
+            ddal.bmi = Math.Round((weight) / (heightinm * heightinm),2);
+
+            ddal.message = "Your fat% is ideal for your goal";
+            return ddal;
+        }
+        public caloriecount dietplan(calculate cal)
+        {
+            if (string.IsNullOrEmpty(cal.gender) || string.IsNullOrEmpty(cal.lifestyle))
+            {
+                //return new responsecal { status = "unsuccessful" };
+            }
+            cal.lifestyle.ToLower();
+            cal.gender = cal.gender.ToLower();
+            double bmr = 0;
+            double maintenance = 0;
+            caloriecount ddal = new caloriecount();
+
+            if (cal.gender == "male")
+            {
+                if (cal.lifestyle == "s")
+                {
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance - (0.2) * maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    else if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "b")
+                        {
+
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance + ((0.25) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat > 12 && cal.bodyfat < 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance - ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance + ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat > 12 && cal.bodyfat < 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance - ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance + ((0.1) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                }
+                else if (cal.lifestyle == "la")
+                {
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance - (0.2) * maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    else if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "b")
+                        {
+
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance + ((0.25) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat > 12 && cal.bodyfat < 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance - ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance + ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat > 12 && cal.bodyfat < 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance - ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance + ((0.1) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                }
+                else if (cal.lifestyle == "ma")
+                {
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance - (0.2) * maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    else if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "b")
+                        {
+
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance + ((0.25) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat > 12 && cal.bodyfat < 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance - ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance + ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat > 12 && cal.bodyfat < 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance - ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance + ((0.1) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                }
+
+                else if (cal.lifestyle == "ha")
+                {
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance - (0.2) * maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    else if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "b")
+                        {
+
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance + ((0.25) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat > 12 && cal.bodyfat < 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance - ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance + ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat > 12 && cal.bodyfat < 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat >= 18)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance - ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat <= 12)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age + 5;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance + ((0.1) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                }
+            }
+            //-----------------------------------------------------------------------FEMALE-------------------------------------------------
+            else if (cal.gender == "female")
+            {
+                if (cal.lifestyle == "s")
+                {
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance - ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance + ((0.25) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat > 22 && cal.bodyfat < 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                    //intermediate
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance + ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance + ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat > 22 && cal.bodyfat < 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                    //advanced
+
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance - ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.3;
+                                ddal.calories = maintenance + ((0.10) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                }
+
+                else if (cal.lifestyle == "la")
+                {
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance - ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance + ((0.25) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat > 22 && cal.bodyfat < 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                    //intermediate
+
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance + ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance + ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat > 22 && cal.bodyfat < 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                    //advanced
+
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance - ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.6;
+                                ddal.calories = maintenance + ((0.10) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                }
+
+                else if (cal.lifestyle == "ma")
+                {
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance - ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance + ((0.25) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat > 22 && cal.bodyfat < 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                    //intermediate
+
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance + ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance + ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat > 22 && cal.bodyfat < 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                    //advanced
+
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance - ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 1.8;
+                                ddal.calories = maintenance + ((0.10) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                }
+
+                else if (cal.lifestyle == "ha")
+                {
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance - ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance + ((0.25) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "b")
+                        {
+                            if (cal.bodyfat > 22 && cal.bodyfat < 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                    //intermediate
+
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance + ((0.2) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance + ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+
+                    if (cal.goal == "build muscle lose fat")
+                    {
+                        if (cal.experience == "i")
+                        {
+                            if (cal.bodyfat > 22 && cal.bodyfat < 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance;
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                    //advanced
+
+
+                    if (cal.goal == "lose fat")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat >= 28)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance - ((0.15) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+
+
+                    if (cal.goal == "build muscle")
+                    {
+                        if (cal.experience == "a")
+                        {
+                            if (cal.bodyfat <= 22)
+                            {
+                                bmr = 10 * cal.weight + 6.25 * cal.height - 5 * cal.age - 161;
+                                maintenance = bmr * 2;
+                                ddal.calories = maintenance + ((0.10) * maintenance);
+                                var result = malediet(maintenance, bmr, cal.weight, cal.height, ddal.calories);
+                                return result;
+                            }
+                            ddal.message = "Your goal is not ideal for your fat%, choose a different goal";
+                            return ddal;
+                        }
+                    }
+                }
+            }
+            //caloriecount res = dietgen(maintenance, cal.bodyfat, cal.gender, cal.experience, cal.goal,cal.weight);
+            return ddal;
+            //return new responsecal { bmr = bmr, maintenance = maintenance, status = "success" };
+            //	return $"BMR = {bmr} and Maintenance Calories = {maintenance}";
+        }
+
         public responsebmi bmi(calculatebmi cal)
 		{
 			string path;
