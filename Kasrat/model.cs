@@ -29,17 +29,22 @@ namespace Kasrat
 	{
 		public dynamic supplementname { get; set;}
 		public List<float> recommendedsuppscore { get; set; }
-		public float[] allsuppscores { get; set; }
+		public List<float> allsuppscores { get; set; }
+        public List<string> allsupplementnames { get; set; }
+        public double[] probability { get; set; } 
 
 	}
 
 	public class supplementnameandscore
 	{
 		public List<string> supplementnames { get; set; }
-		public List<float> scores { get; set; }
-	}
+        public List<float> scores { get; set; }
+        public List<string> allsupplementnames { get; set; }
+        public List<float> allscores { get; set; }
 
-	public class login
+    }
+
+    public class login
 	{
 		public string? username { get; set; }
 		public string? password { get; set; }

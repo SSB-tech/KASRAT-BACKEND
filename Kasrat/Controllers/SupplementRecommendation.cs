@@ -6,6 +6,7 @@ using Microsoft.ML.Data;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SupplementRecommendation.Controllers
 {
@@ -18,7 +19,7 @@ namespace SupplementRecommendation.Controllers
         {
             mlContext = new MLContext();
         }
-        [HttpPost, Authorize]
+        [HttpPost]
         [Route("api/recommendations")]
         public IActionResult GetRecommendation(recommend rec)
         {
@@ -108,28 +109,32 @@ namespace SupplementRecommendation.Controllers
                 // Train model
                 var model = pipeline.Fit(trainData);
 
-                // Evaluate accuracy on test set
-                var evaluator = mlContext.MulticlassClassification.Evaluate(model.Transform(testData));
-                var accuracy = evaluator.MacroAccuracy + acuracy;
-                Console.WriteLine($"Accuracy: {accuracy}");
+                //// Evaluate accuracy on test set
+                //var evaluator = mlContext.MulticlassClassification.Evaluate(model.Transform(testData));
+                //var accuracy = evaluator.MacroAccuracy + acuracy;
+                //Console.WriteLine($"Accuracy: {accuracy}");
 
 
                 // Make prediction
                 var predictionEngine = mlContext.Model.CreatePredictionEngine<SupplementData, SupplementPrediction>(model);
                 var prediction = predictionEngine.Predict(new SupplementData { HealthCondition = HealthCondition, FitnessGoal = FitnessGoal });
-                float[] scores = prediction.Scores; //to 
+                float[] scores = prediction.Scores; //to show all score
+
+                //probability 
+                var probabilityofall = probability(scores);
 
 
                 // Get top 3 supplements with highest scores
                 suppresponse response = new suppresponse();
                 var topSupplements = GetTopSupplements(prediction.Scores, 3);
 
-
                 // Return recommendations
 
                 response.supplementname = topSupplements.supplementnames;
                 response.recommendedsuppscore = topSupplements.scores;
-                response.allsuppscores = prediction.Scores;
+                response.allsuppscores = topSupplements.allscores;
+                response.allsupplementnames = topSupplements.allsupplementnames;
+                response.probability = probabilityofall;
                 return Ok(response);
             }
             catch (Exception ex)
@@ -146,8 +151,33 @@ namespace SupplementRecommendation.Controllers
             var topSupplements = supplementScores.OrderByDescending(ss => ss.Score).Take(numSupplements);
             res.supplementnames = topSupplements.Select(ss => ss.Supplement).ToList();
             res.scores = topSupplements.Select(ss => ss.Score).ToList();
+
+            var alltopSupplements = supplementScores.OrderByDescending(ss => ss.Score);
+            res.allscores = alltopSupplements.Select(aa => aa.Score).ToList();
+            res.allsupplementnames = alltopSupplements.Select(ss => ss.Supplement).ToList();
             return res;
         }
+
+        private double[] probability(float[] scores) //probability
+        {
+            double sumofall = 0;
+            double[] result = new double[scores.Length];
+
+            for (int i = 0; i < scores.Length; i++)
+            {
+                sumofall += Math.Exp(scores[i]);
+            }
+
+            for (int j = 0; j < scores.Length; j++)
+            {
+                result[j] = Math.Exp(scores[j]) / sumofall;
+            }
+
+            Array.Sort(result, scores, Comparer<double>.Create((x, y) => y.CompareTo(x)));
+
+            return result;
+        }
+
 
         public class SupplementData
         {
@@ -163,7 +193,7 @@ namespace SupplementRecommendation.Controllers
             [LoadColumn(3)]
             public string Recommendation { get; set; }
 
-            public static readonly string[] Supplements = { "Whey Protein (Caseine)", "Creatine", "Fat Burner", "Fish Oil", "Whey Protein", "Caffeine", "Multi-Vitamin", "Cinnamon", "Psyllium (Fiber Supplement)", "Green Tea Extract", "Potassium", "Beetroot" };
+            public static readonly string[] Supplements = { "Whey Protein (Caseine)", "Creatine", "Fat Burner", "Fish Oil", "Whey Protein (Isolate)", "Caffeine", "Multi-Vitamin", "Cinnamon", "Psyllium (Fiber Supplement)", "Green Tea Extract", "Potassium", "Beetroot" };
         }
 
         public class SupplementPrediction
