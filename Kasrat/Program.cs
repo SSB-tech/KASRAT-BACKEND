@@ -15,20 +15,20 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(authOptions =>
 {
-	authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-	authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(jwtOptions =>
 {
-	var key = builder.Configuration.GetValue<string>("jwtconfig:key");
-	var keybytes = Encoding.ASCII.GetBytes(key);
-	jwtOptions.SaveToken = true;
-	jwtOptions.TokenValidationParameters = new TokenValidationParameters
-	{
-		IssuerSigningKey = new SymmetricSecurityKey(keybytes),
-		ValidateLifetime = true,
-		ValidateAudience = false,
-		ValidateIssuer = false,
-	};
+    var key = builder.Configuration.GetValue<string>("jwtconfig:key");
+    var keybytes = Encoding.ASCII.GetBytes(key);
+    jwtOptions.SaveToken = true;
+    jwtOptions.TokenValidationParameters = new TokenValidationParameters
+    {
+        IssuerSigningKey = new SymmetricSecurityKey(keybytes),
+        ValidateLifetime = true,
+        ValidateAudience = false,
+        ValidateIssuer = false,
+    };
 });
 builder.Services.AddScoped(typeof(StateController));
 //builder.Services.AddScoped(typeof(CalculationController));
@@ -38,18 +38,13 @@ builder.Services.AddScoped<dal>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseCors(builder =>
 {
-	app.UseCors(); //to hit api from front end
-	app.UseCors(
-		builder =>
-		{
-			builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); //to hit api from front end
-		});
+    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+});
 
-	app.UseSwagger();
-	app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseAuthentication();
 app.UseAuthorization();

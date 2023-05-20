@@ -13,14 +13,32 @@ namespace Kasrat
         [Compare("Password", ErrorMessage = "Password and confirm password do not match")]
         public string ConfirmPassword {get; set;}
 		public string? Email { get; set; }
+		public string Role { get; set; }
 	}
 	public class response
 	{
 		public bool isSuccess { get; set; }
 		public string message { get; set; }
 		public string token { get; set; }
+		public string role { get; set; }
 
 	}
+
+
+	public class suppresponse
+	{
+		public dynamic supplementname { get; set;}
+		public List<float> recommendedsuppscore { get; set; }
+		public float[] allsuppscores { get; set; }
+
+	}
+
+	public class supplementnameandscore
+	{
+		public List<string> supplementnames { get; set; }
+		public List<float> scores { get; set; }
+	}
+
 	public class login
 	{
 		public string? username { get; set; }
@@ -94,5 +112,10 @@ namespace Kasrat
 		public int healthcondition { get; set; }
 		public int fitnessgoal { get; set; }
 
+	}
+
+	public class pdftype
+	{
+		public string category { get; set; }
 	}
 }

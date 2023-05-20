@@ -35,10 +35,16 @@ namespace Kasrat
 					res.message = "Password and ConfirmPassword donot match";
 					return res;
 				}
+                if(a.UserName.IsNullOrEmpty() || a.Password.IsNullOrEmpty() || a.ConfirmPassword.IsNullOrEmpty() || a.Email.IsNullOrEmpty())
+                    {
+                    res.isSuccess = false;
+                    res.message = "Fields are Empty";
+                    return res;
+                }
 
 				var conn = new SqlConnection(configuration.GetConnectionString("default"));
 				conn.Open();
-				conn.Execute("INSERT INTO register (Name, Password, ConfirmPassword, Email) values (@UserName, @Password, @ConfirmPassword, @Email)", a);
+				conn.Execute("INSERT INTO register (Name, Password, ConfirmPassword, Email, roles) values (@UserName, @Password, @ConfirmPassword, @Email, @Role)", a);
 
 				res.isSuccess = true;
 				res.message = "successfully registered";
@@ -77,16 +83,17 @@ namespace Kasrat
 						new Claim(ClaimTypes.NameIdentifier, a.username)
 						}),
 						Expires = DateTime.UtcNow.AddMinutes(30),
-						SigningCredentials = new SigningCredentials(
-							 new SymmetricSecurityKey(keybytes), SecurityAlgorithms.HmacSha256Signature
-							 )
-					};
+                        SigningCredentials = new SigningCredentials(
+                             new SymmetricSecurityKey(keybytes), SecurityAlgorithms.HmacSha256Signature
+                             )
+                    };
 					var token = tokenHandler.CreateToken(tokenDescriptor);
 					var tok = tokenHandler.WriteToken(token);
 					//return (display);
 					res.isSuccess = true;
 					res.message = "Successfully Loggedin";
 					res.token = tok;
+                    res.role = data.roles;
 					return res;
 				}
 				
@@ -3429,7 +3436,7 @@ namespace Kasrat
             return ddal;
             //return new responsecal { bmr = bmr, maintenance = maintenance, status = "success" };
             //	return $"BMR = {bmr} and Maintenance Calories = {maintenance}";
-        }
+        }   
 
         public responsebmi bmi(calculatebmi cal)
 		{
@@ -3438,63 +3445,70 @@ namespace Kasrat
 			var weight = cal.weight;
 			var height = cal.height;
 			var index = weight / (height * height);
-
-			if (index < 18.5)
-			{
-				 data = "Underweight";
-			}
-
-			else if (index>18.5 && index < 24.9)
-			{
-				data = "Normal";
-			}
-
-			else if (index > 24.9 && index < 29.9)
-			{
-				data = "Overweight";
-			}
-			else if (index > 29.9 && index < 34.9)
-			{
-				data = "Obese";
-			}
-			else if (index > 34.9)
-			{
-				data = "Extremely Obese";
-			}
-			//pdf
-
-			//byte[] fileBytes = System.IO.File.ReadAllBytes("C:\\Users\\basne\\source\\repos\\Kasrat\\Kasrat\\content\\cutting.pdf");
-			//MemoryStream stream = new MemoryStream();
-
-			//var stream = new FileStream(@"C:\Users\basne\source\repos\Kasrat\Kasrat\content\cutting.pdf", FileMode.Open);
-			//stream.Position= 0;
-			//return new FileStreamResult(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") { FileDownloadName = "ssb.pdf" };
-			//FileStreamResult file = new FileStreamResult(stream, "application/pdf") { FileDownloadName = "ssb.pdf" };
-			if (data.Length > 0)
-			{
-				if (data == "Obese")
-				{
-					path = @"https://pdfhost.io/v/7x9x9DdXc_Microsoft_Word_OBESE_WORKOUTdocx";
-				}
-
-                else if (data == "Underweight")
+            try
+            {
+                if (index < 18.5)
                 {
-                    path = @"https://pdfhost.io/v/Lj~RSIpot_Microsoft_Word_UNDERWEIGHT_WORKOUTdocx";
+                    data = "Underweight";
                 }
-                else if (data == "Normal")
+
+                else if (index > 18.5 && index < 24.9)
                 {
-                    path = @"https://pdfhost.io/v/8qZdymY2._Microsoft_Word_NORMAL_WORKOUTdocx";
+                    data = "Normal";
                 }
-                else if(data == "Overweight"){
-                    path = @"https://pdfhost.io/v/kUCqJA.2Z_Microsoft_Word_OVERWEIGHT_WORKOUTdocx";
+
+                else if (index > 24.9 && index < 29.9)
+                {
+                    data = "Overweight";
                 }
-				else 
-				{
-					path = @"https://pdfhost.io/v/~YGYgFkTW_Microsoft_Word_EXCEEDINGLY_OVERWEIGHT_WORKOUTdocx";
-				}
-				return new responsebmi { isSuccess= true, bmi = index, result = data, fileurl = path };
-			}
-			return new responsebmi { isSuccess = false };
+                else if (index > 29.9 && index < 34.9)
+                {
+                    data = "Obese";
+                }
+                else if (index > 34.9)
+                {
+                    data = "Extremely Obese";
+                }
+                //pdf
+
+                //byte[] fileBytes = System.IO.File.ReadAllBytes("C:\\Users\\basne\\source\\repos\\Kasrat\\Kasrat\\content\\cutting.pdf");
+                //MemoryStream stream = new MemoryStream();
+
+                //var stream = new FileStream(@"C:\Users\basne\source\repos\Kasrat\Kasrat\content\cutting.pdf", FileMode.Open);
+                //stream.Position= 0;
+                //return new FileStreamResult(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") { FileDownloadName = "ssb.pdf" };
+                //FileStreamResult file = new FileStreamResult(stream, "application/pdf") { FileDownloadName = "ssb.pdf" };
+                //if (data.Length > 0)
+                //{
+                //	if (data == "Obese")
+                //	{
+                //		path = @"https://pdfhost.io/v/7x9x9DdXc_Microsoft_Word_OBESE_WORKOUTdocx";
+                //	}
+
+                //             else if (data == "Underweight")
+                //             {
+                //                 path = @"https://pdfhost.io/v/Lj~RSIpot_Microsoft_Word_UNDERWEIGHT_WORKOUTdocx";
+                //             }
+                //             else if (data == "Normal")
+                //             {
+                //                 path = @"https://pdfhost.io/v/8qZdymY2._Microsoft_Word_NORMAL_WORKOUTdocx";
+                //             }
+                //             else if(data == "Overweight"){
+                //                 path = @"https://pdfhost.io/v/kUCqJA.2Z_Microsoft_Word_OVERWEIGHT_WORKOUTdocx";
+                //             }
+                //	else 
+                //	{
+                //		path = @"https://pdfhost.io/v/~YGYgFkTW_Microsoft_Word_EXCEEDINGLY_OVERWEIGHT_WORKOUTdocx";
+                //	}
+                //	return new responsebmi { isSuccess= true, bmi = index, result = data, fileurl = path };
+                //}
+
+                return new responsebmi { isSuccess = true, bmi = index, result = data };
+            }
+            catch (Exception ex)
+            {
+                return new responsebmi { isSuccess = false };
+            }
 		}
 	}
 }
